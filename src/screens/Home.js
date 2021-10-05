@@ -1,10 +1,19 @@
 import * as React from "react";
-import { View, SafeAreaView, Text, StyleSheet, Dimensions } from "react-native";
+import {
+  View,
+  SafeAreaView,
+  Text,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity
+} from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
-import Search from './Search.js'
+import Search from './Search.js';
+import Player from '../components/Player';
+import MyContext from '../context/MyContext';
 
 Ionicons.loadFont()
 
@@ -30,9 +39,18 @@ const styles = StyleSheet.create ({
 });
 
 const Song = () => {
+
+  const { media, setMedia } = React.useContext(MyContext);
+
+  function changeSong() {
+
+  }
   return (
       <SafeAreaView style={styles.container}>
         <Text>Song</Text>
+        <TouchableOpacity onPress={() => setMedia({title: 'Californication', channel:'RHCP'})}>
+          <Text>Change Song</Text>
+        </TouchableOpacity>
       </SafeAreaView>
     );
 }
@@ -77,7 +95,7 @@ const Home = () => {
         <Tab.Screen name="Setting" component={Setting}/>
       </Tab.Navigator>
       <View style={styles.player}>
-        <Text>Test</Text>
+        <Player/>
       </View>
     </NavigationContainer>
   );

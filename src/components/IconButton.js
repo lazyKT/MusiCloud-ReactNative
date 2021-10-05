@@ -8,13 +8,6 @@ import {
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
-// const styles = StyleSheet.create ({
-//   container: {
-//     flex: 1,
-//   }
-// });
-
-
 const IconButton = ({
   text,
   iconName,

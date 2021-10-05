@@ -28,7 +28,7 @@ const styles = StyleSheet.create ({
     paddingRight: 10,
     paddingLeft: 0,
     paddingBottom: 10,
-    color: '#66AAFF',
+    color: '#353535',
     backgroundColor: 'gainsboro'
   },
   clear: {
