@@ -7,12 +7,14 @@ import {
   Dimensions,
   FlatList,
   Image,
-  ActivityIndicator
+  ActivityIndicator,
+  Modal
 }
 from 'react-native';
 
 import SearchInput from '../components/SearchInput';
 import SearchItem from '../components/SearchItem';
+import Details from '../components/Details'
 import { getSearchResults } from '../network/songRequests';
 
 
@@ -52,6 +54,8 @@ const Search = () => {
 
   const [ results, setResults ] = useState([]);
   const [ searchState , setSearchState ] = useState(null);
+  const [ selectedResult, setSelectedResult ] = useState(null);
+  const [ showModal, setShowModal ] = useState(false);
 
   const setSearchResults = async (q) => {
     setSearchState ("loading")
@@ -65,16 +69,32 @@ const Search = () => {
     }
   };
 
+  const toggleModalVisibe = (videoId) => {
+    setSelectedResult (results.find (r => r.videoId === videoId));
+    setShowModal (!showModal);
+  }
+
   useEffect (() => {
 
   }, [searchState, results])
 
   const renderItem = ({ item }) => (
-    <SearchItem item={item}/>
+    <SearchItem item={item} onPress={id => toggleModalVisibe(id)}/>
   );
 
   return (
     <View style={styles.container}>
+      <Modal
+        animationType="sldie"
+        transparent={false}
+        visible={showModal}
+        >
+        <Details
+          infoType={"search"}
+          data={selectedResult}
+          hideModal={toggleModalVisibe}/>
+      </Modal>
+
       <View style={styles.searchContainer}>
         <SearchInput setSearchResults={setSearchResults}/>
       </View>

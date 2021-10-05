@@ -28,16 +28,12 @@ const styles = StyleSheet.create ({
 })
 
 
-const SearchItem = ({item}) => {
-
-  const showModal = () => {
-    console.log ("Show Modal");
-  }
+const SearchItem = ({item, onPress}) => {
 
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => showModal()}
+      onPress={() => onPress(item.videoId)}
       >
       <Image style={styles.thumbnail}
         source={{uri:item.thumbnail_s}}
